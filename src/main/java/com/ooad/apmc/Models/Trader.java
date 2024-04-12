@@ -32,5 +32,33 @@ public class Trader extends User {
         this.bids = bids;
     }
 
+    public Trader(User user, List<Auction> wonAuctions, List<Bid> bids) {
+        super(user);
+        this.wonAuctions = wonAuctions;
+        this.bids = bids;
+    }
+
+    public Trader(User user) {
+        super(user);
+    }
+
+
+    public List<Auction> getWonAuctions() {
+        return wonAuctions;
+    }
+
+    public void setWonAuctions(List<Auction> wonAuctions) {
+        this.wonAuctions = wonAuctions;
+    }
+
+    public List<Bid> getBids() {
+        return bids;
+    }
+
+    public void setBids(List<Bid> bids) {
+        this.bids = bids;
+    }
+
+
 
 }

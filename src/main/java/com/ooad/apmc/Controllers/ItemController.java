@@ -17,7 +17,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @PostMapping("/create")
+    @PostMapping("/createItem")
     public ResponseEntity<String> createItem(@RequestBody Item item, @RequestParam("farmerId") Long farmerId) {
         try {
             itemService.createItem(item, farmerId);
@@ -25,7 +25,7 @@ public class ItemController {
         } catch (IllegalArgumentException | NoSuchElementException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         } catch (RuntimeException e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating item");
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error creating item"+e.getMessage());
         }
     }
 

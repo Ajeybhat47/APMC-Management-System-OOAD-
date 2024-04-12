@@ -42,6 +42,11 @@ public class BidController {
         }
     }
 
+    @GetMapping("/getAllBidByTraderId")
+    public ResponseEntity<?> getAllBidByTraderId(@RequestParam("traderId") Long traderId) {
+        return ResponseEntity.ok(bidService.getAllBidsByTrader(traderId));
+    }
+
     @PutMapping("/updateBid")
     public ResponseEntity<?> updateBid(@RequestParam("bidId") Long bidId, @RequestParam("price") Double price) {
         try {

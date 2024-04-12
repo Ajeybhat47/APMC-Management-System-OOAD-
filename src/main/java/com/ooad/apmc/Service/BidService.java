@@ -45,6 +45,13 @@ public class BidService {
         }
         return new BidDTO(bid);
     }
+
+    public List<BidDTO> getAllBidsByTrader(Long traderId) {
+        Trader trader = traderRepository.findById(traderId).orElseThrow(() -> new NoSuchElementException("Trader not found for ID: " + traderId));
+
+        List<Bid> bids = trader.getBids();
+        return bids.stream().map(BidDTO::new).collect(Collectors.toList());
+    }
     
     public String addBid(Bid bid, Long auctionId, Long traderId) {
         if (auctionId == null || traderId == null || bid == null) {

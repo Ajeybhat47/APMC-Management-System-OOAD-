@@ -40,7 +40,12 @@ public abstract class User {
     }
 
     
-
+    public User(User user) {
+        this.userId = user.getUserId();
+        this.email = user.getEmail();
+        this.password = user.getPassword();
+        this.username = user.getUsername();
+    }
     
 
     public Long getUserId() {

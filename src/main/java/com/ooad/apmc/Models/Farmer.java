@@ -36,6 +36,9 @@ public class Farmer extends User {
         this.itemsForSale = itemsForSale;
     }
 
+    public Farmer(User user) {
+        super(user);
+    }
 
     public String getAddress() {
         return address;

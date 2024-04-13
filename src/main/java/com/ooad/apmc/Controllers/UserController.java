@@ -55,4 +55,27 @@ public class UserController {
     }
 
     // Similarly, update getTraderById and getFarmerById methods
+
+    @GetMapping("/trader/{traderId}")
+    public String getTraderById(@PathVariable("traderId") Long traderId, Model model) {
+        Trader trader = userService.getTraderById(traderId);
+        if (trader != null) {
+            model.addAttribute("trader", trader);
+            return "trader-details"; // Thymeleaf template
+        } else {
+            return "not-found"; // Thymeleaf template
+        }
+    }
+
+    @GetMapping("/farmer/{farmerId}")
+    public String getFarmerById(@PathVariable("farmerId") Long farmerId, Model model) {
+        Farmer farmer = userService.getFarmerById(farmerId);
+        if (farmer != null) {
+            model.addAttribute("farmer", farmer);
+            return "farmer-details"; // Thymeleaf template
+        } else {
+            return "not-found"; // Thymeleaf template
+        }
+    }
+    
 }

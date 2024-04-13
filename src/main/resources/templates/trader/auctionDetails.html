@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Auction Details</title>
+</head>
+
+<body>
+    <h1>Auction Details</h1>
+
+    <div>
+        <p>Auction ID: <span th:text="${auction.auctionId}"></span></p>
+        <p>Status: <span th:text="${auction.status}"></span></p>
+        <p>Initial Price: <span th:text="${auction.initialPrice}"></span></p>
+        <p>Item ID: <span th:text="${auction.itemId}"></span></p>
+        <p>Winner ID: <span th:text="${auction.winnerId}"></span></p>
+        <p>Item Name: <span th:text="${auction.itemName}"></span></p>
+        <p>Item Description: <span th:text="${auction.itemDescription}"></span></p>
+    </div>
+
+    <!-- Place Bid button -->
+    <button onclick="redirectToURL('/auction/bid/addBidForm')">Place Bid</button>
+
+    <!-- Back to All Auctions link -->
+    <a th:href="@{/auction}">Back to All Auctions</a>
+
+    <script th:inline="javascript">
+        function redirectToURL(url) {
+            var auctionId = /*[[${auction.auctionId}]]*/ '';
+            var userIdStr = /*[[${userId}]]*/ '';
+            var userId = parseInt(userIdStr); // Convert userId from String to Long
+            if (isNaN(userId)) {
+                console.error("Invalid user ID format: " + userIdStr);
+                return;
+            }
+            window.location.href = url + '?auctionId=' + auctionId + '&userId=' + userId;
+        }
+    </script>
+</body>
+
+</html>

@@ -22,12 +22,16 @@ public class AuctionController {
 
 
     @GetMapping
-    public String landingPage() {
+    public String auctionHandler(@RequestParam(value = "userType") String userType , @RequestParam(value = "userId") String userId,Model model) {
+        
+        model.addAttribute("userId", userId);
+        model.addAttribute("userType", userType); // Add userType as an attribute
+
         return "auction"; // Thymeleaf template name
     }
 
     @GetMapping("/{auctionId}/getAllBids")
-    public String getAllBids(@PathVariable Long auctionId, Model model) {
+    public String getAllBids(@PathVariable(value = "auctionId") Long auctionId, Model model) {
         try {
             List<BidDTO> bids = auctionService.getAllBids(auctionId);
             model.addAttribute("bids", bids);
@@ -43,16 +47,29 @@ public class AuctionController {
 
     // get auction by id
     @GetMapping("/getAuction")
-    public String getAuction(@RequestParam Long auctionId, Model model) {
+    public String getAuction(@RequestParam(value = "auctionId") Long auctionId, 
+                            @RequestParam(value = "userType") String userType,
+                            @RequestParam(value = "userId") String userIdStr, 
+                            Model model) {
         try {
+            Long userId = Long.parseLong(userIdStr); // Convert userId from String to Long
             AuctionDTO auction = auctionService.getAuctionById(auctionId);
             if (auction != null) {
                 model.addAttribute("auction", auction);
-                return "auctionDetails"; // Thymeleaf template name
+                model.addAttribute("userId", userId);
+                model.addAttribute("userType", userType);
+
+                if (userType.equals("trader"))
+                    return "trader/auctionDetails"; // Thymeleaf template name
+                else
+                    return "auctionDetails"; // Thymeleaf template name
             } else {
                 model.addAttribute("error", "Auction not found with ID " + auctionId);
                 return "errorPage"; // Thymeleaf template name for error handling
             }
+        } catch (NumberFormatException e) {
+            model.addAttribute("error", "Invalid user ID format: " + userIdStr);
+            return "errorPage"; // Thymeleaf template name for error handling
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling
@@ -61,6 +78,7 @@ public class AuctionController {
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
+
     
     @GetMapping("/{auctionId}/getWinner")
     public String getWinner(@PathVariable Long auctionId, Model model) {

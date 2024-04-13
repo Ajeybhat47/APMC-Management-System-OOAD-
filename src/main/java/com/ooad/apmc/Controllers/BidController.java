@@ -32,23 +32,30 @@ public class BidController {
         return "bid"; // Thymeleaf template name for bid landing page
     }
     
+// Controller Method
     @GetMapping("/addBidForm")
-    public String addBidForm(@RequestParam("userId") Long userId, @RequestParam("auctionId") Long auctionId, Model model) 
-    {
+    public String addBidForm(@RequestParam("userId") Long userId, @RequestParam("auctionId") Long auctionId, Model model) {
+        // Fetch user and auction details
+    
+        // Add user, auction, and a new Bid object to the Model
+        model.addAttribute("userId", userId);
+        model.addAttribute("auctionId", auctionId);
+        model.addAttribute("bid", new Bid()); // Assuming Bid is a DTO or form backing object
 
-        model.addAttribute("user", userService.getUserDTOById(userId));
-        model.addAttribute("auction", auctionService.getAuctionById(auctionId));
-        model.addAttribute("bid", new Bid());
-        return "trader/addBidForm"; // Thymeleaf template name for bid form
+        // Return the name of the Thymeleaf template
+        return "trader/addBidForm";
     }
 
-    
     @PostMapping("/addBid")
-    public String addBid(@ModelAttribute("bid") Bid bid, @RequestParam("auctionId") Long auctionId, @RequestParam("traderId") Long traderId, Model model) {
+    public String addBid(@ModelAttribute("bid") Bid bid, @RequestParam(value = "auctionId") Long auctionId, @RequestParam(value = "traderId") Long traderId, Model model) {
         try {
             String result = bidService.addBid(bid, auctionId, traderId);
             model.addAttribute("result", result);
-            return "bidAdded"; // Thymeleaf template name for success message
+            // Assuming userId is a Long in the model
+            model.addAttribute("userId", String.valueOf(traderId));
+
+            model.addAttribute("userType", "trader");
+            return "trader/bidAdded"; // Thymeleaf template name for success message
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling

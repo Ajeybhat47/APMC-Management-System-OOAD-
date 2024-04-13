@@ -18,17 +18,12 @@
         <p>Item Description: <span th:text="${auction.itemDescription}"></span></p>
     </div>
 
-    <button onclick="redirectToURL('/auction/bid/addBidForm')">Place Bid</button>
-
+   
     <!-- Add a button to navigate back to the list of all auctions -->
-    <a href="/auction">Back to All Auctions</a>
+    <a th:href="@{/auction}">Back to All Auctions</a>
 
 
-    <script>
-        function redirectToURL(url) {
-            window.location.href = url;
-        }
-    </script>
+
     
 </body>
 

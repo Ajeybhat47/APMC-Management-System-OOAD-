@@ -27,18 +27,22 @@ public class ApmcController {
     @Autowired
     private APMCService apmcService;
 
-    @GetMapping("/{userType}")
-    public String landingPage(@PathVariable String userType) {
-        
-        if(userType.equals("trader"))
-            return "trader/traderDashboard"; // Thymeleaf template name
-        else if(userType.equals("farmer"))
-            return "farmer/farmerDashboard"; // Thymeleaf template name
-        else if(userType.equals("worker"))
-            return "worker/workerDashboard"; // Thymeleaf template name
-        else
-            return "errorPage"; // Thymeleaf template name for error handling
-    }
+    @GetMapping("/{userType}/{userId}")
+public String landingPage(@PathVariable String userType, @PathVariable Long userId, Model model) {
+    
+    model.addAttribute("userId", userId);
+    model.addAttribute("userType", userType); // Add userType as an attribute
+
+    if(userType.equals("trader"))
+        return "trader/traderDashboard"; // Thymeleaf template name
+    else if(userType.equals("farmer"))
+        return "farmer/farmerDashboard"; // Thymeleaf template name
+    else if(userType.equals("worker"))
+        return "worker/workerDashboard"; // Thymeleaf template name
+    else
+        return "errorPage"; // Thymeleaf template name for error handling
+}
+
 
     @GetMapping("/auction/createAuction")
     public String getMethodName() {
@@ -74,11 +78,13 @@ public class ApmcController {
     }
 
     @GetMapping("/auction/getAllActiveAuctions")
-    public String getAllActiveAuctions(Model model) {
+    public String getAllActiveAuctions(@RequestParam(value = "userType")String userType,@RequestParam(value = "userId") String userId,Model model) {
         try {
             List<AuctionDTO> auctions = auctionService.getAllAuctionsByStatus("active");
             model.addAttribute("auctions", auctions);
-            return "activeAuctions"; // Thymeleaf template name
+            model.addAttribute("userId", userId);
+            model.addAttribute("userType", userType);
+            return userType+"/activeAuctions"; // Thymeleaf template name
         } catch (Exception e) {
             model.addAttribute("error", "Failed to retrieve active auctions: " + e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling

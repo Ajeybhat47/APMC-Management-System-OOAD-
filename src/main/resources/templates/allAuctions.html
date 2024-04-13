@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>All Auctions</title>
+    <script>
+        function navigateToAuction(auctionId) {
+            window.location.href = "/auction/getAuction?auctionId=" + auctionId;
+        }
+    </script>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <h1>All Auctions</h1>
+
+    <div th:each="auction : ${auctions}" class="auction-div" th:onclick="'navigateToAuction(' + ${auction.auctionId} + ')'">
+        <p>Auction ID: <span th:text="${auction.auctionId}"></span></p>
+        <p>Status: <span th:text="${auction.status}"></span></p>
+        <p>Initial Price: <span th:text="${auction.initialPrice}"></span></p>
+        <p>Item ID: <span th:text="${auction.itemId}"></span></p>
+        <p>Winner ID: <span th:text="${auction.winnerId}"></span></p>
+        <p>Item Name: <span th:text="${auction.itemName}"></span></p>
+        <p>Item Description: <span th:text="${auction.itemDescription}"></span></p>
+    </div>
+</body>
+
+</html>

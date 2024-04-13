@@ -1,0 +1,26 @@
+/* Styles for auction divs */
+.auction-div {
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    cursor: pointer;
+    background-color: #f9f9f9;
+}
+
+.auction-div:hover {
+    background-color: #f0f0f0;
+}
+
+/* Additional styles for table headers */
+th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Additional styles for table cells */
+td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}

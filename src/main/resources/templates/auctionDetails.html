@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Auction Details</title>
+</head>
+
+<body>
+    <h1>Auction Details</h1>
+
+    <div>
+        <p>Auction ID: <span th:text="${auction.auctionId}"></span></p>
+        <p>Status: <span th:text="${auction.status}"></span></p>
+        <p>Initial Price: <span th:text="${auction.initialPrice}"></span></p>
+        <p>Item ID: <span th:text="${auction.itemId}"></span></p>
+        <p>Winner ID: <span th:text="${auction.winnerId}"></span></p>
+        <p>Item Name: <span th:text="${auction.itemName}"></span></p>
+        <p>Item Description: <span th:text="${auction.itemDescription}"></span></p>
+    </div>
+
+    <!-- Add a button to navigate back to the list of all auctions -->
+    <a href="/auction">Back to All Auctions</a>
+</body>
+
+</html>

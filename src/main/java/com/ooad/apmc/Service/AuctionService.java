@@ -34,7 +34,7 @@ public class AuctionService {
                 throw new IllegalArgumentException("Item with ID " + itemId + " not found");
             }
             auction.setItem(item);
-
+            auction.setStatus("active");
             auctionRepository.save(auction);
             return "Auction created successfully";
         } catch (Exception e) {
@@ -42,6 +42,18 @@ public class AuctionService {
             e.printStackTrace();
             return "Failed to create auction: " + e.getMessage();
         }
+    }
+
+    public AuctionDTO getAuctionById(Long auctionId) {
+        try {
+            Auction auction = auctionRepository.getReferenceById(auctionId);
+            return AuctionDTO.mapEntityToDto(auction);
+        } catch (Exception e) {
+            // Log the exception or handle it appropriately
+            e.printStackTrace();
+            return null;
+        }
+        
     }
 
     public List<AuctionDTO> getAllAuctions() {

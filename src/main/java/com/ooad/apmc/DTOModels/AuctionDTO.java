@@ -8,17 +8,22 @@ public class AuctionDTO {
     private String status;
     private Double initialPrice;
     private Long itemId;
+    private String itemName;
+    private String itemDescription;
     private Long winnerId;
 
     public AuctionDTO() {
     }
  
-    public AuctionDTO(Long auctionId, String status, Double initialPrice, Long itemId, Long winnerId) {
+    public AuctionDTO(Long auctionId, String status, Double initialPrice, Long itemId, Long winnerId, String itemName, String itemDescription) {
+
         this.auctionId = auctionId;
         this.status = status;
         this.initialPrice = initialPrice;
         this.itemId = itemId;
         this.winnerId = winnerId;
+        this.itemName = itemName;
+        this.itemDescription = itemDescription;
     }
 
     public Long getAuctionId() {
@@ -41,8 +46,6 @@ public class AuctionDTO {
         return initialPrice;
     }
 
-
-
     public void setInitialPrice(Double initialPrice) {
         this.initialPrice = initialPrice;
     }
@@ -63,23 +66,29 @@ public class AuctionDTO {
         this.winnerId = winnerId;
     }
 
-    @Override
-    public String toString() {
-        return "AuctionDTO{" +
-                "auctionId=" + auctionId +
-                ", status='" + status + '\'' +
-                ", initialPrice=" + initialPrice +
-                ", itemId=" + itemId +
-                ", winnerId=" + winnerId +
-                '}';
+    public String getItemName() {
+        return itemName;
     }
+
+    public void setItemName(String itemName) {
+        this.itemName = itemName;
+    }
+
+    public String getItemDescription() {
+        return itemDescription;
+    }
+
+    public void setItemDescription(String itemDescription) {
+        this.itemDescription = itemDescription;
+    }
+
 
     public static AuctionDTO mapEntityToDto(Auction auction) {
         
         if(auction.getWinner() != null)
-            return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , auction.getWinner().getUserId());
+            return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , auction.getWinner().getUserId(), auction.getItem().getItemName(), auction.getItem().getDescription());
     
-        return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , null);
+        return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , null, auction.getItem().getItemName(), auction.getItem().getDescription());
     }
 
 

@@ -22,7 +22,7 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-    
+
     @Autowired
     private FarmerRepository farmerRepository;
 
@@ -40,6 +40,13 @@ public class UserService {
             return users.stream().map(UserDTO::mapEntityToDto).collect(Collectors.toList());
         } catch (Exception e) {
             throw new RuntimeException("Error occurred while fetching all users: " + e.getMessage(), e);
+        }
+    }
+    public User getUserByUsername(String username) {
+        try {
+            return userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+        } catch (Exception e) {
+            throw new RuntimeException("Error occurred while fetching user by username: " + e.getMessage(), e);
         }
     }
 

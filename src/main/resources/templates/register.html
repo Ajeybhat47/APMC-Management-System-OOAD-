@@ -1,0 +1,47 @@
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Register</title>
+        <link rel="stylesheet" type="text/css" th:href="@{/login.css}">
+        <style>
+            .top-right {
+                position: absolute;
+                top: 8px;
+                right: 16px;
+                font-size: 18px;
+            }
+        </style>
+    </head>
+<body>
+    <div class="login-container">
+    <h2>Register</h2>
+    <form action="#" th:action="@{/register}" method="post">
+        <div class="form-group">
+            <label for="userName">Username:</label>
+            <input type="text" id="userName" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" required>
+        </div>
+            <label for="role">Role:</label>
+            <br>
+            <select id="role" name="role">
+                <option value="farmer">Farmer</option>
+                <option value="bidder">Bidder</option>
+                <option value="worker">Worker</option>
+            </select>
+            <br>
+        <button type="submit">Register</button>
+    </form>
+</div>
+<a href="/login" class="top-right"><button>Login</button></a>
+
+</body>
+</html>

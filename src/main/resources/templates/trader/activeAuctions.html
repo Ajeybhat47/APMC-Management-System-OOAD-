@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Active Auctions</title>
+    
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+</head>
+
+<body>
+    <h1>Active Auctions</h1>
+
+    <div th:each="auction : ${auctions}" class="auction-div" th:data-auctionid="${auction.auctionId}" th:data-usertype="${userType}" th:data-userid="${userId}">
+        <p>Auction ID: <span th:text="${auction.auctionId}"></span></p>
+        <p>Status: <span th:text="${auction.status}"></span></p>
+        <p>Initial Price: <span th:text="${auction.initialPrice}"></span></p>
+        <p>Item ID: <span th:text="${auction.itemId}"></span></p>
+        <p>Winner ID: <span th:text="${auction.winnerId}"></span></p>
+    </div>
+
+    <script th:inline="javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var auctionDivs = document.querySelectorAll('.auction-div');
+            auctionDivs.forEach(function(div) {
+                div.addEventListener('click', function() {
+                    var auctionId = this.getAttribute('data-auctionid');
+                    var userType = this.getAttribute('data-usertype');
+                    var userId = this.getAttribute('data-userid');
+                    navigateToAuction(auctionId, userType, userId);
+                });
+            });
+        });
+
+        function navigateToAuction(auctionId, userType, userId) {
+            var url = '/apmc/auction/getAuction?auctionId=' + auctionId + '&userType=' + userType + '&userId=' + userId;
+            window.location.href = url;
+        }
+    </script>
+</body>
+
+</html>

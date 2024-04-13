@@ -90,8 +90,4 @@ public class AuctionDTO {
     
         return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , null, auction.getItem().getItemName(), auction.getItem().getDescription());
     }
-
-
-
-    
 }

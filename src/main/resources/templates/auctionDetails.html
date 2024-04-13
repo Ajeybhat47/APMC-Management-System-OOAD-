@@ -18,8 +18,13 @@
         <p>Item Description: <span th:text="${auction.itemDescription}"></span></p>
     </div>
 
+   
     <!-- Add a button to navigate back to the list of all auctions -->
-    <a href="/auction">Back to All Auctions</a>
+    <a th:href="@{/auction}">Back to All Auctions</a>
+
+
+
+    
 </body>
 
 </html>

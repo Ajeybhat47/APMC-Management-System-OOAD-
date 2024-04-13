@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Landing Page</title>
+</head>
+
+<body>
+    <h1>Welcome to the Auction Management System</h1>
+    <ul>
+        <li><a th:href="@{/auction/bid/addBidForm}">Add Bid</a></li>
+        <li><a th:href="@{/auction/bid/getAllBidByTraderId}">View All Bids by Trader</a></li>
+        <li><a th:href="@{/auction/bid/getBidByTraderId}">View Bid Details</a></li>
+    </ul>
+</body>
+
+</html>

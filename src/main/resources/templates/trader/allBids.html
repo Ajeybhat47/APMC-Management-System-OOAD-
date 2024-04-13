@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>All Bids</title>
+</head>
+
+<body>
+    <h1>All Bids</h1>
+    <table>
+        <tr>
+            <th>Auction ID</th>
+            <th>Trader ID</th>
+            <th>Price</th>
+        </tr>
+        <tr th:each="bid : ${bids}">
+            <td th:text="${bid.auctionId}"></td>
+            <td th:text="${bid.traderId}"></td>
+            <td th:text="${bid.price}"></td>
+        </tr>
+    </table>
+</body>
+
+</html>

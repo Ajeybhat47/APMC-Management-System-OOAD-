@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Auction</title>
+</head>
+<body>
+    <h1>Create Auction</h1>
+    <form action="#" th:action="@{/auction/createAuction}" method="post">
+        <label for="itemName">Item id:</label><br>
+        <input type="number" id="itemId" name="itemId"><br>
+        
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description"></textarea><br>
+        
+        <label for="startingPrice">Starting Price:</label><br>
+        <input type="number" id="startingPrice" name="startingPrice"><br>
+        
+        <!-- <label for="startDate">Start Date:</label><br>
+        <input type="datetime-local" id="startDate" name="startDate"><br>
+         -->
+        <label for="endDate">End Date:</label><br>
+        <input type="datetime-local" id="endDate" name="endDate"><br>
+        
+        <button type="submit">Create Auction</button>
+    </form>
+</body>
+</html>

@@ -62,11 +62,17 @@ public class AuctionService {
         try {
             List<Auction> auctions = auctionRepository.findAll();
 
-            // check status
+
+            // check status of each auction
+
             for(Auction auction : auctions)
             {
                 checkStatus(auction);
             }
+
+
+           auctions = auctionRepository.findAll();
+
 
             return auctions.stream().map(AuctionDTO::mapEntityToDto).collect(Collectors.toList());
         } catch (Exception e) {
@@ -204,6 +210,7 @@ public class AuctionService {
         
         if(now.isAfter(auction.getClosingTime()))
         {
+            auction.setStatus("closed");
             closeAuction(auction.getAuctionId());
         }
     }

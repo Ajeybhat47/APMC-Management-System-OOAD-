@@ -55,7 +55,7 @@ public class BidController {
             model.addAttribute("userId", String.valueOf(traderId));
 
             model.addAttribute("userType", "trader");
-            return "trader/bidAdded"; // Thymeleaf template name for success message
+            return "redirect:trader/bidAdded"; // Thymeleaf template name for success message
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling

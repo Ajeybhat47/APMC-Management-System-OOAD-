@@ -93,6 +93,10 @@ public class Item {
         return seller;
     }
 
+    public boolean isAccepted() {
+        return this.accepted;
+    }
+
     public void setSeller(Farmer seller) {
         this.seller = seller;
     }
@@ -112,6 +116,4 @@ public class Item {
     public void setSoldPrice(Double soldPrice) {
         this.soldPrice = soldPrice;
     }
-    
-  
 }

@@ -7,8 +7,13 @@ import org.springframework.web.bind.annotation.*;
 
 import com.ooad.apmc.DTOModels.BidDTO;
 import com.ooad.apmc.Models.Bid;
+import com.ooad.apmc.Models.Auction;
+
+import com.ooad.apmc.DTOModels.AuctionDTO;
+import com.ooad.apmc.Models.Notification;
 import com.ooad.apmc.Service.AuctionService;
 import com.ooad.apmc.Service.BidService;
+import com.ooad.apmc.Service.NotificationService;
 import com.ooad.apmc.Service.UserService;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,21 +27,26 @@ public class BidController {
     @Autowired
     private BidService bidService;
 
+
     @Autowired
     private UserService userService;
 
-    @Autowired AuctionService auctionService;
-    
+    @Autowired
+    private NotificationService notificationService;
+
+    @Autowired
+    private AuctionService auctionService;
+
     @GetMapping
     public String getMethodName() {
-        return "bid"; // Thymeleaf template name for bid landing page
+        return "trader/bid"; // Thymeleaf template name for bid landing page
     }
-    
+
 // Controller Method
     @GetMapping("/addBidForm")
     public String addBidForm(@RequestParam("userId") Long userId, @RequestParam("auctionId") Long auctionId, Model model) {
         // Fetch user and auction details
-    
+
         // Add user, auction, and a new Bid object to the Model
         model.addAttribute("userId", userId);
         model.addAttribute("auctionId", auctionId);
@@ -51,11 +61,18 @@ public class BidController {
         try {
             String result = bidService.addBid(bid, auctionId, traderId);
             model.addAttribute("result", result);
-            // Assuming userId is a Long in the model
             model.addAttribute("userId", String.valueOf(traderId));
+            String message = "A bid of " + bid.getBidAmount() + " has been placed by Trader ID: " + traderId + " for Auction ID: " + auctionId;
+            Notification notification = new Notification();
+            notification.setMessage(message);
+            notification.setStatus("pending");
+
+            AuctionDTO auction = auctionService.getAuctionById(auctionId);
+            notification.setUser(auction.getSeller());
+            notificationService.createNotification(notification);
 
             model.addAttribute("userType", "trader");
-            return "redirect:trader/bidAdded"; // Thymeleaf template name for success message
+            return "trader/bidAdded"; // Thymeleaf template name for success message
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling
@@ -91,4 +108,7 @@ public class BidController {
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
+
+
+
 }

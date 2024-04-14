@@ -56,8 +56,11 @@
         <h1>Welcome to the Auction System</h1>
     </header>
     <main>
-        <div class="action">
+        <!-- <div class="action">
             <a th:href="@{/apmc/auction/createAuction(userType=${userType}, userId=${userId})}">Create Auction</a>
+        </div> -->
+        <div class="action">
+            <a th:href="@{/notifications/user/{userId}(userId=${userId})}">View Auction Notifications</a>
         </div>
         <div class="action">
             <a th:href="@{/apmc/auction/getAllActiveAuctions(userType=${userType}, userId=${userId})}">View Active Auctions</a>

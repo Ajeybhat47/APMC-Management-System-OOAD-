@@ -52,6 +52,7 @@ public UserDTO userDTO() {
                 userService.createWorker(worker);
                 user = worker;
                 break;
+
             case "farmer":
                 Farmer farmer = new Farmer();
                 farmer.setUsername(userDto.getUsername());
@@ -60,6 +61,7 @@ public UserDTO userDTO() {
                 userService.createFarmer(farmer);
                 user = farmer;
                 break;
+
             case "trader":
                 Trader trader = new Trader();
                 trader.setUsername(userDto.getUsername());
@@ -68,18 +70,18 @@ public UserDTO userDTO() {
                 userService.createTrader(trader);
                 user = trader;
                 break;
+
             default:
                 model.addAttribute("error", "Invalid role");
                 return "register";
             }
             model.addAttribute("user", user);
             return "redirect:/login";
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
             model.addAttribute("error", e.getMessage());
             return "register";
         }
-
-
 
         }
         @GetMapping("/home")
@@ -101,14 +103,15 @@ public UserDTO userDTO() {
                     return "redirect:/apmc/trader/"+user.getUserId();
                 }
                 return "redirect:/login";
-            } else {
+            }
+            else {
                 model.addAttribute("error", "Invalid username or password");
                 return "login";
             }
-        } catch (RuntimeException e) {
+        }
+        catch (RuntimeException e) {
             model.addAttribute("error",e.getMessage());
             return "login";
         }
     }
-
 }

@@ -4,10 +4,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.ooad.apmc.DTOModels.BidDTO;
 import com.ooad.apmc.Models.Auction;
+import com.ooad.apmc.Models.Item;
 import com.ooad.apmc.Models.Bid;
 
 import com.ooad.apmc.Repository.AuctionRepository;
-import com.ooad.apmc.Repository.BidRepository;
+import com.ooad.apmc.Repository.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -27,6 +28,9 @@ public class BidService {
 
     @Autowired
     private TraderRepository traderRepository;
+
+    @Autowired
+    private ItemRepository itemRepository;
 
     public BidDTO getBidById(Long bidId) {
         Bid bid = bidRepository.findById(bidId).orElseThrow(() -> new NoSuchElementException("Bid not found for ID: " + bidId));
@@ -52,7 +56,7 @@ public class BidService {
         List<Bid> bids = trader.getBids();
         return bids.stream().map(BidDTO::new).collect(Collectors.toList());
     }
-    
+
     public String addBid(Bid bid, Long auctionId, Long traderId) {
         if (auctionId == null || traderId == null || bid == null) {
             throw new IllegalArgumentException("Auction ID, Trader ID, and Bid information must not be null.");
@@ -72,6 +76,34 @@ public class BidService {
 
         bidRepository.save(bid);
         return "Bid has been added successfully";
+    }
+
+    public Bid saveBid(Bid bid) {
+        try {
+            return bidRepository.save(bid);
+        } catch (Exception e) {
+            throw new RuntimeException("Error occurred while saving bid: " + e.getMessage(), e);
+        }
+    }
+
+    public Bid getHighestBidForItem(Long itemId) {
+        Item item = itemRepository.findById(itemId)
+            .orElseThrow(() -> new NoSuchElementException("Item not found for ID: " + itemId));
+
+        return bidRepository.findByItemOrderByBidAmountDesc(item)
+            .stream()
+            .findFirst()
+            .orElseThrow(() -> new NoSuchElementException("No bids found for item ID: " + itemId));
+    }
+
+    public Bid getHighestBidForAuction(Long auctionId) {
+        Auction auction = auctionRepository.findById(auctionId)
+            .orElseThrow(() -> new NoSuchElementException("Auction not found for ID: " + auctionId));
+
+        return bidRepository.findByAuctionOrderByBidAmountDesc(auction)
+            .stream()
+            .findFirst()
+            .orElseThrow(() -> new NoSuchElementException("No bids found for auction ID: " + auctionId));
     }
 
     public void updateBid(Long bidId, Double price) {

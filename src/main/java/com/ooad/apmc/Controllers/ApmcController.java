@@ -25,7 +25,7 @@ public class ApmcController {
 
     @GetMapping("/{userType}/{userId}")
     public String landingPage(@PathVariable String userType, @PathVariable Long userId, Model model) {
-        
+
         model.addAttribute("userId", userId);
         model.addAttribute("userType", userType); // Add userType as an attribute
 
@@ -76,7 +76,7 @@ public class ApmcController {
     @GetMapping("/auction/getAllActiveAuctions")
     public String getAllActiveAuctions(@RequestParam(value = "userType")String userType,@RequestParam(value = "userId") String userId,Model model) {
         try {
-            List<AuctionDTO> auctions = auctionService.getAllAuctionsByStatus("active");
+            List<AuctionDTO> auctions = auctionService.getAllAuctionsByStatus("OPEN");
             model.addAttribute("auctions", auctions);
             model.addAttribute("userId", userId);
             model.addAttribute("userType", userType);

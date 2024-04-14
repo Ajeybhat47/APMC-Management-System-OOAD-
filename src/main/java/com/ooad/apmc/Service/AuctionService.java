@@ -16,6 +16,8 @@ import com.ooad.apmc.Models.Bid;
 import com.ooad.apmc.Models.Item;
 
 import com.ooad.apmc.Repository.AuctionRepository;
+// import java.util.Optional;
+import java.util.NoSuchElementException;
 
 @Transactional
 @Service
@@ -38,7 +40,7 @@ public class AuctionService {
             {
                 throw new IllegalArgumentException("Item with ID " + itemId + " is already sold");
             }
-            
+
             auction.setItem(item);
             auction.setStatus("active");
             auctionRepository.save(auction);
@@ -49,7 +51,23 @@ public class AuctionService {
             return "Failed to create auction: " + e.getMessage();
         }
     }
+    public Long getSellerIdFromAuction(Long auctionId) {
+        Auction auction = auctionRepository.findById(auctionId)
+            .orElseThrow(() -> new IllegalArgumentException("Auction with ID " + auctionId + " not found"));
+        Item item = auction.getItem();
+        if (item == null) {
+            throw new IllegalArgumentException("Item for Auction with ID " + auctionId + " not found");
+        }
+        return item.getSeller().getUserId();
+    }
 
+    public Auction saveAuction(Auction auction) {
+        // Save the auction
+        Auction savedAuction = auctionRepository.save(auction);
+
+        // Return the saved auction
+        return savedAuction;
+    }
     public AuctionDTO getAuctionById(Long auctionId) {
         try {
             Auction auction = auctionRepository.getReferenceById(auctionId);
@@ -60,7 +78,7 @@ public class AuctionService {
             e.printStackTrace();
             return null;
         }
-        
+
     }
 
     public List<AuctionDTO> getAllAuctions() {
@@ -137,10 +155,10 @@ public class AuctionService {
                     }
                 }
             }
-            
+
             auctionRepository.save(auction);
             return "Auction closed successfully";
-           
+
         } catch (Exception e) {
             // Log the exception or handle it appropriately
             e.printStackTrace();
@@ -191,10 +209,10 @@ public class AuctionService {
     private void findWinner(Auction auction) {
         List<Bid> bids = auction.getBids();
         try {
-           
+
             if (bids.isEmpty()) {
                 System.out.println("No bids found in auction");
-                
+
             }
             double maxamt = 0;
             Bid winningBid = null;
@@ -209,7 +227,7 @@ public class AuctionService {
                 auction.setWinner(winningBid.getBidder());
                 auction.setWinningBid(winningBid);
             }
-            
+
 
         } catch (Exception e) {
             // Log the exception or handle it appropriately
@@ -220,15 +238,18 @@ public class AuctionService {
     public void checkStatus(Auction auction )
     {
         // get current time check closing time and modify status
-        LocalDateTime now = LocalDateTime.now(); 
-        
+        LocalDateTime now = LocalDateTime.now();
+
         if(now.isAfter(auction.getClosingTime()))
         {
             auction.setStatus("closed");
             closeAuction(auction.getAuctionId());
         }
     }
-
+    public Auction getAuctionByItemId(Long itemId) {
+        return auctionRepository.findByItem_ItemId(itemId)
+            .orElseThrow(() -> new NoSuchElementException("No auction found for item ID: " + itemId));
+    }
 
 }
 

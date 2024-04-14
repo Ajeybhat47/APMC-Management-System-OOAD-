@@ -1,5 +1,5 @@
 package com.ooad.apmc.DTOModels;
-
+import com.ooad.apmc.Models.User;
 import com.ooad.apmc.Models.Auction;
 
 public class AuctionDTO {
@@ -14,7 +14,7 @@ public class AuctionDTO {
 
     public AuctionDTO() {
     }
- 
+
     public AuctionDTO(Long auctionId, String status, Double initialPrice, Long itemId, Long winnerId, String itemName, String itemDescription) {
 
         this.auctionId = auctionId;
@@ -81,13 +81,26 @@ public class AuctionDTO {
     public void setItemDescription(String itemDescription) {
         this.itemDescription = itemDescription;
     }
+    private Long sellerId;
 
+    public Long getSellerId() {
+        return sellerId;
+    }
+
+    private User seller;
+
+    public User getSeller() {
+        return seller;
+    }
 
     public static AuctionDTO mapEntityToDto(Auction auction) {
-        
-        if(auction.getWinner() != null)
-            return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , auction.getWinner().getUserId(), auction.getItem().getItemName(), auction.getItem().getDescription());
-    
-        return new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , null, auction.getItem().getItemName(), auction.getItem().getDescription());
+        AuctionDTO auctionDTO;
+        if(auction.getWinner() != null) {
+            auctionDTO = new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , auction.getWinner().getUserId(), auction.getItem().getItemName(), auction.getItem().getDescription());
+        } else {
+            auctionDTO = new AuctionDTO(auction.getAuctionId(), auction.getStatus(), auction.getBasePrice(), auction.getItem().getItemId() , null, auction.getItem().getItemName(), auction.getItem().getDescription());
+        }
+        auctionDTO.seller = auction.getItem().getSeller();
+        return auctionDTO;
     }
 }

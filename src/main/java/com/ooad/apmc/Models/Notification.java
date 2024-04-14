@@ -8,9 +8,12 @@ public class Notification {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long notificationId;
-    
+
     @Column(name = "message")
     private String message;
+
+    @Column(name = "status")
+    private String status="Not Sent";
 
     @ManyToOne
     @JoinColumn(name = "user_id")
@@ -34,6 +37,13 @@ public class Notification {
 
     public String getMessage() {
         return message;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    public String getStatus() {
+        return status;
     }
 
     public void setMessage(String message) {

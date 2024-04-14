@@ -31,7 +31,7 @@ public class Auction {
     // Joining references
     @ManyToOne
     private APMC apmc;
-    
+
     @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;

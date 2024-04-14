@@ -19,17 +19,21 @@ public class Bid {
     @Column(name = "bid_time")
     private LocalDateTime bidTime;
 
-    
+
     @Column(name = "bid_status")
     private String bidStatus;
 
     @ManyToOne
     @JoinColumn(name = "bidder_id")
     private Trader bidder;
-    
+
     @ManyToOne(fetch = FetchType.LAZY) // FetchType.LAZY for lazy loading
     @JoinColumn(name = "auction_id")
     private Auction auction;
+
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     // Constructors
     public Bid() {
@@ -81,6 +85,14 @@ public class Bid {
 
     public void setAuction(Auction auction) {
         this.auction = auction;
+    }
+
+    public Item getItem() {
+        return item;
+    }
+
+    public void setItem(Item item) {
+        this.item = item;
     }
 
     public String getBidStatus() {

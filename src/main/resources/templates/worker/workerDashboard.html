@@ -52,17 +52,10 @@
     <div class="container">
         <h1>Welcome to APMC</h1>
         <h2>Worker Dashboard</h2>
-        <a th:href="@{/apmc/auction(userType=${userType}, userId=${userId})}">
-            <h5>Auctions</h5>
-            <p>Explore available auctions.</p>
+
+        <a th:href="@{/notifications/user/{userId}(userId=${userId})}">
+            <button>View Notifications</button>
         </a>
-        <a th:href="@{/apmc/trader/History(traderId=${userId})}">
-            <h5>History</h5>
-            <p>View your History.</p>
-        </a>
-        <a href="#">
-        <h5>Contact Us</h5>
-        <p>Get in touch with APMC.</p></a>
     </div>
 
 </body>

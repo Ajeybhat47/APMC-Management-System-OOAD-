@@ -1,6 +1,7 @@
 package com.ooad.apmc.Service;
 
 import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -174,6 +175,17 @@ public class AuctionService {
         } catch (Exception e) {
             // Log the exception or handle it appropriately
             e.printStackTrace();
+        }
+    }
+
+    public void checkStatus(Auction auction )
+    {
+        // get current time check closing time and modify status
+        LocalDateTime now = LocalDateTime.now(); 
+        
+        if(now.isAfter(auction.getClosingTime()));
+        {
+            closeAuction(auction.getAuctionId());
         }
     }
 }

@@ -28,20 +28,20 @@ public class ApmcController {
     private APMCService apmcService;
 
     @GetMapping("/{userType}/{userId}")
-public String landingPage(@PathVariable String userType, @PathVariable Long userId, Model model) {
+    public String landingPage(@PathVariable String userType, @PathVariable Long userId, Model model) {
+        
+        model.addAttribute("userId", userId);
+        model.addAttribute("userType", userType); // Add userType as an attribute
 
-    model.addAttribute("userId", userId);
-    model.addAttribute("userType", userType); // Add userType as an attribute
-
-    if(userType.equals("trader"))
-        return "trader/traderDashboard"; // Thymeleaf template name
-    else if(userType.equals("farmer"))
-        return "farmer/farmerDashboard"; // Thymeleaf template name
-    else if(userType.equals("worker"))
-        return "worker/workerDashboard"; // Thymeleaf template name
-    else
-        return "errorPage"; // Thymeleaf template name for error handling
-}
+        if(userType.equals("trader"))
+            return "trader/traderDashboard"; // Thymeleaf template name
+        else if(userType.equals("farmer"))
+            return "farmer/farmerDashboard"; // Thymeleaf template name
+        else if(userType.equals("worker"))
+            return "worker/workerDashboard"; // Thymeleaf template name
+        else
+            return "errorPage"; // Thymeleaf template name for error handling
+    }
 
 
     @GetMapping("/auction/createAuction")
@@ -63,7 +63,6 @@ public String landingPage(@PathVariable String userType, @PathVariable Long user
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
-
 
     @GetMapping("/auction/getAllAuctions")
     public String getAllAuctions(Model model) {
@@ -117,4 +116,6 @@ public String landingPage(@PathVariable String userType, @PathVariable Long user
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
+
+
 }

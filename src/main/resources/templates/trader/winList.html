@@ -2,26 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <title>Auction Details</title>
+    <meta charset="UTF-8">
+    <title>Won Auctions</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
     <style>
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
-            color: #333;
             margin: 0;
             padding: 0;
-            text-align: center;
         }
         h1 {
+            text-align: center;
             margin-top: 20px;
+            color: #333;
         }
-        div {
+        .auction-div {
             background-color: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             padding: 20px;
             margin: 20px auto;
-            max-width: 600px;
+            max-width: 800px;
         }
         p {
             margin: 10px 0;
@@ -29,29 +31,21 @@
         span {
             font-weight: bold;
         }
-        a {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
-            border-radius: 5px;
-            background-color: #007bff;
-            color: white;
-            text-decoration: none;
-            transition: background-color 0.3s;
-        }
-        a:hover {
-            background-color: #0056b3;
-        }
     </style>
 </head>
 
 <body>
-    <h1>Auction Details</h1>
+    <h1>Won Auctions</h1>
 
-    <div>
+    <div th:each="auction : ${Auctions}" class="auction-div">
         <p><span>Auction ID:</span> <span th:text="${auction.auctionId}"></span></p>
         <p><span>Status:</span> <span th:text="${auction.status}"></span></p>
         <p><span>Initial Price:</span> <span th:text="${auction.initialPrice}"></span></p>
         <p><span>Item ID:</span> <span th:text="${auction.itemId}"></span></p>
+        <p><span>Item Name:</span> <span th:text="${auction.itemName}"></span></p>
+        <p><span>Item Description:</span> <span th:text="${auction.itemDescription}"></span></p>
         <p><span>Winner ID:</span> <span th:text="${auction.winnerId}"></span></p>
-        <p><span>Item Name:</span>
+    </div>
+</body>
+
+</html>

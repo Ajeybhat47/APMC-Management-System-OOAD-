@@ -3,19 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <title>Add Bid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        form {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 400px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+        button[type="submit"] {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        button[type="submit"]:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
 <h2>Add Bid</h2>
 
 <form th:action="@{'/auction/bid/addBid?traderId=' + ${userId} + '&auctionId=' + ${auctionId}}" method="post">
-    <!-- No need for hidden input fields -->
-
     <label for="bidAmount">Bid Amount:</label>
     <input type="number" id="bidAmount" name="bidAmount" required/>
-
-    <!-- Additional fields if needed -->
-
     <button type="submit">Submit Bid</button>
 </form>
 

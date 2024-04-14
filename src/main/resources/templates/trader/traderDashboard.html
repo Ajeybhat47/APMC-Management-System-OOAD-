@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,36 +23,61 @@
         h1 {
             color: #333;
             text-align: center;
-        }
-        p {
-            color: #666;
-            text-align: center;
+            margin-bottom: 20px;
         }
         a {
             color: #007bff;
             text-decoration: none;
+            transition: color 0.3s;
         }
         a:hover {
-            text-decoration: underline;
+            color: #0056b3;
+        }
+        .card {
+            background-color: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .card h5 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .card p {
+            margin: 0;
+            color: #666;
         }
     </style>
 </head>
+
 <body>
-    
     <div class="container">
         <h1>Welcome to APMC</h1>
-        <a th:href="@{/apmc/auction(userType=${userType}, userId=${userId})}">
-            <h5>Auctions</h5>
-            <p>Explore available auctions.</p>
-        </a>
-        <a th:href="@{/apmc/trader/History(traderId=${userId})}">
-            <h5>History</h5>
-            <p>View your History.</p>
-        </a>
-        <h5>Contact</h5>
-        <p>Get in touch with APMC.</p>
-        <a href="#">Contact Us</a>
-    </div>
 
+        <div class="card">
+            <a th:href="@{/apmc/auction(userType=${userType}, userId=${userId})}">
+                <h5>Auctions</h5>
+                <p>Explore available auctions.</p>
+            </a>
+        </div>
+
+        <div class="card">
+            <a th:href="@{/apmc/trader/History(traderId=${userId})}">
+                <h5>History</h5>
+                <p>View your Bid history.</p>
+            </a>
+        </div>
+
+        <div class="card">
+            
+            <a th:href="@{/apmc/trader/WonAuctions(traderId=${userId})}">
+                <h5>Won Auctions</h5>
+                <p>View your all won auctions</p>
+            </a>
+        </div>
+    </div>
 </body>
+
 </html>

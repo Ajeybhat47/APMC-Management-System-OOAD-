@@ -3,8 +3,37 @@
 
 <head>
     <title>Active Auctions</title>
-    
     <link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #333;
+        }
+        .auction-div {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+        .auction-div:hover {
+            transform: scale(1.02);
+        }
+        .auction-div p {
+            margin: 5px 0;
+            color: #333;
+        }
+    </style>
 </head>
 
 <body>

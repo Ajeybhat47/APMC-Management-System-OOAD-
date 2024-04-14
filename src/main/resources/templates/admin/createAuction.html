@@ -8,19 +8,18 @@
     <h1>Create Auction</h1>
     <form action="#" th:action="@{/apmc/auction/createAuction}" method="post">
         <label for="itemId">Item id:</label><br>
-        <input type="number" id="itemId" name="itemId"><br>
+        <input type="number" id="itemId" name="itemId" required><br>
         
         <label for="description">Description:</label><br>
-        <textarea id="description" name="item.description"></textarea><br>
+        <textarea id="description" name="item.description" required></textarea><br>
         
         <label for="startingPrice">Starting Price:</label><br>
-        <input type="number" id="startingPrice" name="basePrice"><br>
+        <input type="number" id="startingPrice" name="basePrice" required><br>
         
         <label for="endDate">End Date:</label><br>
-        <input type="datetime-local" id="endDate" name="closingTime"><br>
+        <input type="datetime-local" id="endDate" name="closingTime" required><br>
         
         <button type="submit">Create Auction</button>
     </form>
-    
 </body>
 </html>

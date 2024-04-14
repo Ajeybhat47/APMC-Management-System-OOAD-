@@ -3,11 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>All Bids</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .bid {
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            padding: 15px;
+        }
+        .bid-info {
+            margin-bottom: 5px;
+        }
+        .bid-label {
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .btn-view {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
-    <h1>All Bids</h1>
-    <ul>
-        <li th:each="bid : ${bids}" th:text="${bid}"></li>
-    </ul>
+    <div class="container">
+        <h1>All Bids</h1>
+        <div th:each="bid : ${bids}" class="bid">
+            <div class="bid-info">
+                <span class="bid-label">Bid ID:</span>
+                <span th:text="${bid.bidId}"></span>
+            </div>
+            <div class="bid-info">
+                <span class="bid-label">Auction ID:</span>
+                <span th:text="${bid.auctionId}"></span>
+            </div>
+            <div class="bid-info">
+                <span class="bid-label">Bidder ID:</span>
+                <span th:text="${bid.bidderId}"></span>
+            </div>
+            <div class="bid-info">
+                <span class="bid-label">Bid Amount:</span>
+                <span th:text="${bid.bidAmount}"></span>
+            </div>
+            <div class="bid-info">
+                <span class="bid-label">Bid Time:</span>
+                <span th:text="${bid.bidTime}"></span>
+            </div>
+            <div class="bid-info">
+                <a th:href="@{/apmc/auction/closed/getAuction(auctionId=${bid.auctionId})}">
+                    <button class="btn-view">View Auction Details</button>
+                </a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

@@ -22,20 +22,19 @@
             margin: 20px auto;
             display: inline-block;
         }
-        .action a {
-            display: inline-block;
+        .action button {
             padding: 15px 30px;
+            border: none;
             border-radius: 8px;
             background-color: #4CAF50;
             color: white;
-            text-decoration: none;
             cursor: pointer;
             transition: background-color 0.3s;
             width: 200px; /* Adjust the width as needed */
             box-sizing: border-box; /* Include padding in the width */
             font-size: 16px;
         }
-        .action a:hover {
+        .action button:hover {
             background-color: #45a049;
         }
         main {
@@ -57,13 +56,13 @@
     </header>
     <main>
         <div class="action">
-            <a th:href="@{/apmc/auction/createAuction(userType=${userType}, userId=${userId})}">Create Auction</a>
+            <button onclick="location.href='/apmc/auction/createAuction?userType=${userType}&userId=${userId}'">Create Auction</button>
         </div>
         <div class="action">
-            <a th:href="@{/apmc/auction/getAllActiveAuctions(userType=${userType}, userId=${userId})}">View Active Auctions</a>
+            <button onclick="location.href='/apmc/auction/getAllActiveAuctions?userType=${userType}&userId=${userId}'">View Active Auctions</button>
         </div>
         <div class="action">
-            <a th:href="@{/apmc/auction/getAllClosedAuctions(userType=${userType}, userId=${userId})}">View Closed Auctions</a>
+            <button onclick="location.href='/apmc/auction/getAllClosedAuctions'">View Closed Auctions</button>
         </div>
         <p>This is the landing page for the auction system. You can navigate to different sections using the buttons above.</p>
     </main>

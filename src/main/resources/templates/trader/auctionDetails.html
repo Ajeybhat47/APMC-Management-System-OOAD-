@@ -3,12 +3,59 @@
 
 <head>
     <title>Auction Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .auction-details {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+        .auction-details p {
+            margin: 10px 0;
+        }
+        .place-bid-button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            font-size: 16px;
+        }
+        .place-bid-button:hover {
+            background-color: #45a049;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Auction Details</h1>
 
-    <div>
+    <div class="auction-details">
         <p>Auction ID: <span th:text="${auction.auctionId}"></span></p>
         <p>Status: <span th:text="${auction.status}"></span></p>
         <p>Initial Price: <span th:text="${auction.initialPrice}"></span></p>
@@ -19,10 +66,10 @@
     </div>
 
     <!-- Place Bid button -->
-    <button onclick="redirectToURL('/auction/bid/addBidForm')">Place Bid</button>
+    <button class="place-bid-button" onclick="redirectToURL('/auction/bid/addBidForm')">Place Bid</button>
 
     <!-- Back to All Auctions link -->
-    <a th:href="@{/auction}">Back to All Auctions</a>
+    <a class="back-link" th:href="@{/auction}">Back to All Auctions</a>
 
     <script th:inline="javascript">
         function redirectToURL(url) {

@@ -7,7 +7,7 @@
 </head>
 
 <body>
-    <h1>Active Auctions</h1>
+    <h1>Closed Auctions</h1>
 
     <div th:each="auction : ${auctions}" class="auction-div" th:onclick="'navigateToAuction(' + ${auction.auctionId} + ')'">
         <p>Auction ID: <span th:text="${auction.auctionId}"></span></p>
@@ -19,7 +19,7 @@
 
     <script>
         function navigateToAuction(auctionId) {
-            window.location.href = "/auction/getAuction?auctionId=" + auctionId;
+            window.location.href = "/apmc/auction/closed/getAuction?auctionId=" + auctionId;
         }
     </script>
 </body>

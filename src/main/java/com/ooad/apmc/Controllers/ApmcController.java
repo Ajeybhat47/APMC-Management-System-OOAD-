@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ooad.apmc.DTOModels.AuctionDTO;
 import com.ooad.apmc.Models.Auction;
-import com.ooad.apmc.Service.APMCService;
 import com.ooad.apmc.Service.AuctionService;
 
 import java.util.List;
@@ -23,9 +22,6 @@ public class ApmcController {
 
     @Autowired
     private AuctionService auctionService;
-
-    @Autowired
-    private APMCService apmcService;
 
     @GetMapping("/{userType}/{userId}")
     public String landingPage(@PathVariable String userType, @PathVariable Long userId, Model model) {
@@ -69,7 +65,7 @@ public class ApmcController {
     @GetMapping("/auction/getAllAuctions")
     public String getAllAuctions(Model model) {
         try {
-            List<AuctionDTO> auctions = apmcService.getAuctions();
+            List<AuctionDTO> auctions = auctionService.getAllAuctions();
             model.addAttribute("auctions", auctions);
             return "allAuctions"; // Thymeleaf template name
         } catch (Exception e) {
@@ -92,7 +88,7 @@ public class ApmcController {
         }
     }
 
-    @GetMapping("/getAllClosedAuctions")
+    @GetMapping("/auction/getAllClosedAuctions")
     public String getAllClosedAuctions(Model model) {
         try {
             List<AuctionDTO> auctions = auctionService.getAllAuctionsByStatus("closed");

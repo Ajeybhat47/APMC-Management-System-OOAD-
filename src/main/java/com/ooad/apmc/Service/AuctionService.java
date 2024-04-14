@@ -61,12 +61,18 @@ public class AuctionService {
     public List<AuctionDTO> getAllAuctions() {
         try {
             List<Auction> auctions = auctionRepository.findAll();
+
+
             // check status of each auction
+
             for(Auction auction : auctions)
             {
                 checkStatus(auction);
             }
-            auctions = auctionRepository.findAll();
+
+           auctions = auctionRepository.findAll();
+
+
             return auctions.stream().map(AuctionDTO::mapEntityToDto).collect(Collectors.toList());
         } catch (Exception e) {
             // Log the exception or handle it appropriately

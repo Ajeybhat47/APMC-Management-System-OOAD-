@@ -44,6 +44,7 @@ public class Auction {
     @JoinColumn(name = "winner_id")
     private Trader winner;
 
+
     // Constructors
     public Auction() {
     }
@@ -120,15 +121,11 @@ public class Auction {
         this.winner = winner;
     }
 
-    @Override
-    public String toString() {
-        return "Auction{" +
-                "auctionId=" + auctionId +
-                ", item=" + item +
-                ", basePrice=" + basePrice +
-                ", status='" + status + '\'' +
-                ", closingTime=" + closingTime +
-                ", winner=" + winner +
-                '}';
+    public APMC getApmc() {
+        return apmc;
+    }
+
+    public void setApmc(APMC apmc) {
+        this.apmc = apmc;
     }
 }

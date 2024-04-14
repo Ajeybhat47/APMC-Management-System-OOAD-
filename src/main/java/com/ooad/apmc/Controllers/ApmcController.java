@@ -29,7 +29,7 @@ public class ApmcController {
 
     @GetMapping("/{userType}/{userId}")
 public String landingPage(@PathVariable String userType, @PathVariable Long userId, Model model) {
-    
+
     model.addAttribute("userId", userId);
     model.addAttribute("userType", userType); // Add userType as an attribute
 
@@ -46,7 +46,7 @@ public String landingPage(@PathVariable String userType, @PathVariable Long user
 
     @GetMapping("/auction/createAuction")
     public String getMethodName() {
-        return "createAuction"; // Thymeleaf template name
+        return "admin/createAuction"; // Thymeleaf template name
     }
 
     @PostMapping("/auction/createAuction")
@@ -54,7 +54,7 @@ public String landingPage(@PathVariable String userType, @PathVariable Long user
         try {
             String result = auctionService.createAuction(auction, itemId);
             model.addAttribute("result", result);
-            return "auctionCreated"; // Thymeleaf template name
+            return "admin/auctionCreated"; // Thymeleaf template name
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling
@@ -63,7 +63,7 @@ public String landingPage(@PathVariable String userType, @PathVariable Long user
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
-    
+
 
     @GetMapping("/auction/getAllAuctions")
     public String getAllAuctions(Model model) {

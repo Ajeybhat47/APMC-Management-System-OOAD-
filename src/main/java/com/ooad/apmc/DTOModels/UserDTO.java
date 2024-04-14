@@ -3,11 +3,12 @@ package com.ooad.apmc.DTOModels;
 import com.ooad.apmc.Models.User;
 
 public class UserDTO {
-    
+
     private Long userId;
-    private String userName;
+    private String username;
     private String email;
-    
+    private String password;
+
     // private String role;
 
     public UserDTO() {
@@ -15,16 +16,16 @@ public class UserDTO {
 
     public UserDTO(Long userId, String userName, String email) {
         this.userId = userId;
-        this.userName = userName;
+        this.username = userName;
         this.email = email;
         // this.role = role;
     }
 
     public UserDTO(User user) {
         this.userId = user.getUserId();
-        this.userName = user.getUsername();
+        this.username = user.getUsername();
         this.email = user.getEmail();
-        
+
     }
 
     public Long getUserId() {
@@ -35,12 +36,12 @@ public class UserDTO {
         this.userId = userId;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String userName) {
+        this.username = userName;
     }
 
     public String getEmail() {
@@ -49,6 +50,13 @@ public class UserDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     // public String getRole() {
@@ -64,7 +72,7 @@ public class UserDTO {
                 user.getUserId(),
                 user.getUsername(),
                 user.getEmail()
-                
+
         );
     }
 }

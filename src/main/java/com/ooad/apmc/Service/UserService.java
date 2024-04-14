@@ -43,11 +43,22 @@ public class UserService {
         }
     }
     public User getUserByUsername(String username) {
+        // try {
+        //     return userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
+        // } catch (Exception e) {
+        //     throw new RuntimeException("Error occurred while fetching user by username: " + e.getMessage(), e);
+        // }
         try {
-            return userRepository.findByUsername(username).orElseThrow(() -> new NoSuchElementException("User not found"));
-        } catch (Exception e) {
-            throw new RuntimeException("Error occurred while fetching user by username: " + e.getMessage(), e);
-        }
+            return farmerRepository.findByUsername(username)
+            .map(user -> (User) user)
+            .orElseGet(() -> workerRepository.findByUsername(username)
+                .map(user -> (User) user)
+                .orElseGet(() -> traderRepository.findByUsername(username)
+                    .map(user -> (User) user)
+                    .orElseThrow(() -> new NoSuchElementException("User not found"))));
+    } catch (Exception e) {
+        throw new RuntimeException("Error occurred while fetching user by username: " + e.getMessage(), e);
+    }
     }
 
     public User getUserById(Long id) {

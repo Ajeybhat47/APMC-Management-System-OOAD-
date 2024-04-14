@@ -79,6 +79,8 @@ public UserDTO userDTO() {
             return "register";
         }
 
+
+
         }
         @GetMapping("/home")
         public String home() {
@@ -86,11 +88,18 @@ public UserDTO userDTO() {
     }
 
     @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
+    public String login(@RequestParam String username, @RequestParam String password,@RequestParam String role, Model model) {
         try {
             User user = userService.getUserByUsername(username);
             if (user != null && user.getPassword().equals(password)) {
                 model.addAttribute("user", user);
+                if (role.equals("worker") && user instanceof Worker) {
+                    return "redirect:/worker/workerDashboard";
+                } else if (role.equals("farmer") && user instanceof Farmer) {
+                    return "redirect:/farmer/farmerDashboard";
+                } else if (role.equals("trader") && user instanceof Trader) {
+                    return "redirect:/apmc/trader/"+user.getUserId();
+                }
                 return "redirect:/home";
             } else {
                 model.addAttribute("error", "Invalid username or password");

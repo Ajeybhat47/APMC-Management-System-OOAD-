@@ -100,7 +100,7 @@ public UserDTO userDTO() {
                 } else if (role.equals("trader") && user instanceof Trader) {
                     return "redirect:/apmc/trader/"+user.getUserId();
                 }
-                return "redirect:/home";
+                return "redirect:/login";
             } else {
                 model.addAttribute("error", "Invalid username or password");
                 return "login";

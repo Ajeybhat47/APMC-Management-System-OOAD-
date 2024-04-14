@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>APMC Home</title>
     <style>
-        body {
+         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
@@ -23,6 +23,10 @@
             color: #333;
             text-align: center;
         }
+        h2 {
+            color: #555;
+            text-align: center;
+        }
         p {
             color: #666;
             text-align: center;
@@ -30,14 +34,21 @@
         a {
             color: #007bff;
             text-decoration: none;
+            display: block;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+            transition: background-color 0.3s ease;
         }
         a:hover {
-            text-decoration: underline;
+            text-decoration: none;
+            background-color: #e2e6ea;
         }
     </style>
 </head>
 <body>
-    
+
     <div class="container">
         <h1>Welcome to APMC</h1>
         <h2>Worker Dashboard</h2>
@@ -49,9 +60,9 @@
             <h5>History</h5>
             <p>View your History.</p>
         </a>
-        <h5>Contact</h5>
-        <p>Get in touch with APMC.</p>
-        <a href="#">Contact Us</a>
+        <a href="#">
+        <h5>Contact Us</h5>
+        <p>Get in touch with APMC.</p></a>
     </div>
 
 </body>

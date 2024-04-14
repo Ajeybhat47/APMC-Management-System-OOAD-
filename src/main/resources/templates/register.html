@@ -13,10 +13,12 @@
                 font-size: 18px;
             }
         </style>
+
     </head>
 <body>
     <div class="login-container">
     <h2>Register</h2>
+
     <form action="#" th:action="@{/register}" method="post">
         <div class="form-group">
             <label for="userName">Username:</label>
@@ -32,11 +34,12 @@
             <label for="password">Password:</label>
             <input type="password" id="password" required>
         </div>
+
             <label for="role">Role:</label>
             <br>
             <select id="role" name="role">
                 <option value="farmer">Farmer</option>
-                <option value="bidder">Bidder</option>
+                <option value="trader">Trader</option>
                 <option value="worker">Worker</option>
             </select>
             <br>

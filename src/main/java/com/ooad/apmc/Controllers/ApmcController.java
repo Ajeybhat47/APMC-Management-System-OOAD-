@@ -46,7 +46,7 @@ public class ApmcController {
 
     @GetMapping("/auction/createAuction")
     public String getMethodName() {
-        return "createAuction"; // Thymeleaf template name
+        return "admin/createAuction"; // Thymeleaf template name
     }
 
     @PostMapping("/auction/createAuction")
@@ -54,7 +54,9 @@ public class ApmcController {
         try {
             String result = auctionService.createAuction(auction, itemId);
             model.addAttribute("result", result);
-            return "redirect:auctionCreated"; // Thymeleaf template name
+
+            return "admin/auctionCreated"; // Thymeleaf template name
+
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling
@@ -63,7 +65,7 @@ public class ApmcController {
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
-    
+
     @GetMapping("/auction/getAllAuctions")
     public String getAllAuctions(Model model) {
         try {

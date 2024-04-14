@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Farmer Details</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Add your CSS files here -->
+</head>
+<body>
+    <h1>Farmer Details</h1>
+    <table>
+        <tr>
+            <td>ID:</td>
+            <td th:text="${farmer.userId}"></td>
+        </tr>
+        <tr>
+            <td>Username:</td>
+            <td th:text="${farmer.username}"></td>
+        </tr>
+        <tr>
+            <td>Email:</td>
+            <td th:text="${farmer.email}"></td>
+        </tr>
+        <!-- Add more fields as needed -->
+    </table>
+</body>
+</html>

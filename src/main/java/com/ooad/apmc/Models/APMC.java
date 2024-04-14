@@ -12,6 +12,9 @@ public class APMC {
     @Column(name = "apmc_id")
     private Long auctionId;
 
+    @Column(name = "admin")
+    private String admin;
+
     @OneToMany(mappedBy = "apmc")
     private List<Auction> auctions;
 

@@ -79,6 +79,30 @@ public class AuctionController {
         }
     }
 
+    @GetMapping("/closed/getAuction")
+    public String getAuction(@RequestParam(value = "auctionId") Long auctionId,Model model) {
+        try {
+            
+            AuctionDTO auction = auctionService.getAuctionById(auctionId);
+            if (auction != null) {
+                model.addAttribute("auction", auction);
+                return "auctionDetails"; // Thymeleaf template name
+            } else {
+                model.addAttribute("error", "Auction not found with ID " + auctionId);
+                return "errorPage"; // Thymeleaf template name for error handling
+            }
+        } catch (NumberFormatException e) {
+            model.addAttribute("error", "Invalid user ID format: " );
+            return "errorPage"; // Thymeleaf template name for error handling
+        } catch (IllegalArgumentException e) {
+            model.addAttribute("error", e.getMessage());
+            return "errorPage"; // Thymeleaf template name for error handling
+        } catch (Exception e) {
+            model.addAttribute("error", "Failed to retrieve auction: " + e.getMessage());
+            return "errorPage"; // Thymeleaf template name for error handling
+        }
+    }
+
     
     @GetMapping("/{auctionId}/getWinner")
     public String getWinner(@PathVariable Long auctionId, Model model) {

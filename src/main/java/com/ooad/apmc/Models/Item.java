@@ -23,12 +23,18 @@ public class Item {
     @Column(name = "initial_price")
     private Double initialPrice;
 
+    @Column(name = "accepted")
+    private boolean accepted = false;
+
     @ManyToOne(fetch = FetchType.LAZY) // FetchType.LAZY for lazy loading
     @JoinColumn(name = "seller_id")
     private Farmer seller;
 
     @Column(name = "is_sold")
     private boolean isSold = false;
+
+    @Column(name = "sold_price")
+    private Double soldPrice;
 
     // Constructors
     public Item() {
@@ -99,16 +105,13 @@ public class Item {
         isSold = sold;
     }
 
-    // ToString method
-    @Override
-    public String toString() {
-        return "Item{" +
-                "itemId=" + itemId +
-                ", itemName='" + itemName + '\'' +
-                ", category='" + category + '\'' +
-                ", description='" + description + '\'' +
-                ", initialPrice=" + initialPrice +
-                ", seller=" + seller +
-                '}';
+    public Double getSoldPrice() {
+        return soldPrice;
     }
+
+    public void setSoldPrice(Double soldPrice) {
+        this.soldPrice = soldPrice;
+    }
+    
+  
 }

@@ -48,6 +48,7 @@ public class AuctionService {
     public AuctionDTO getAuctionById(Long auctionId) {
         try {
             Auction auction = auctionRepository.getReferenceById(auctionId);
+            checkStatus(auction);
             return AuctionDTO.mapEntityToDto(auction);
         } catch (Exception e) {
             // Log the exception or handle it appropriately
@@ -60,6 +61,15 @@ public class AuctionService {
     public List<AuctionDTO> getAllAuctions() {
         try {
             List<Auction> auctions = auctionRepository.findAll();
+
+            // check status
+            for(Auction auction : auctions)
+            {
+                checkStatus(auction);
+            }
+
+           auctions = auctionRepository.findAll();
+
             return auctions.stream().map(AuctionDTO::mapEntityToDto).collect(Collectors.toList());
         } catch (Exception e) {
             // Log the exception or handle it appropriately

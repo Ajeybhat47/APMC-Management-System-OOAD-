@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Items List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Items List</h1>
+    <a th:href="@{/apmc/farmer/{id}(id=${items[0].seller.userId})}" class="btn">Back to Dashboard</a>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Item ID</th>
+                <th>Item Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Initial Price</th>
+                <th>Accepted</th>
+                <th>Seller ID</th>
+                <th>Is Sold</th>
+                <th>Sold Price</th>
+                <!-- <th>Highest Bid</th> -->
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="item : ${items}">
+                <td th:text="${item.itemId}"></td>
+                <td th:text="${item.itemName}"></td>
+                <td th:text="${item.category}"></td>
+                <td th:text="${item.description}"></td>
+                <td th:text="${item.initialPrice}"></td>
+                <td th:text="${item.accepted} ? 'Yes' : 'No'"></td>
+                <td th:text="${item.seller.userId}"></td>
+                <td th:text="${item.isSold} ? 'Yes' : 'No'"></td>
+                <td th:text="${item.soldPrice}"></td>
+                <!-- <td th:text="${highestBids[item.itemId].bidAmount}"></td> -->
+                <td>
+                    <form th:if="${!item.isSold}" th:action="@{/apmc/auction/endAuction/{itemId}(itemId=${item.itemId}, userId=${item.seller.userId})}" method="post">
+                        <input type="submit" value="End Auction">
+                    </form>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

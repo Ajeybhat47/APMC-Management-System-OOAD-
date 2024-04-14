@@ -54,7 +54,7 @@ public class ApmcController {
         try {
             String result = auctionService.createAuction(auction, itemId);
             model.addAttribute("result", result);
-            return "auctionCreated"; // Thymeleaf template name
+            return "redirect:auctionCreated"; // Thymeleaf template name
         } catch (IllegalArgumentException e) {
             model.addAttribute("error", e.getMessage());
             return "errorPage"; // Thymeleaf template name for error handling

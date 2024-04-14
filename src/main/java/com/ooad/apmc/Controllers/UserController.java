@@ -84,7 +84,7 @@ public class UserController {
     }
 
     @PostMapping("/createTrader")
-public String createTrader(@ModelAttribute("trader") Trader trader, BindingResult result, RedirectAttributes redirectAttributes) {
+    public String createTrader(@ModelAttribute("trader") Trader trader, BindingResult result, RedirectAttributes redirectAttributes) {
     if (result.hasErrors()) {
         // Handle validation errors
         return "trader-form"; // Return back to the form with errors

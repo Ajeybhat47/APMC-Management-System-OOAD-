@@ -39,7 +39,6 @@ public class ApmcController {
             return "errorPage"; // Thymeleaf template name for error handling
     }
 
-
     @GetMapping("/auction/createAuction")
     public String getMethodName() {
         return "admin/createAuction"; // Thymeleaf template name
@@ -114,6 +113,5 @@ public class ApmcController {
             return "errorPage"; // Thymeleaf template name for error handling
         }
     }
-
 
 }

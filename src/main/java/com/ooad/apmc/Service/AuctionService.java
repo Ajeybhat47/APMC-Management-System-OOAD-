@@ -34,6 +34,11 @@ public class AuctionService {
             if (item == null) {
                 throw new IllegalArgumentException("Item with ID " + itemId + " not found");
             }
+            if(item.isSold())
+            {
+                throw new IllegalArgumentException("Item with ID " + itemId + " is already sold");
+            }
+            
             auction.setItem(item);
             auction.setStatus("active");
             auctionRepository.save(auction);
@@ -122,6 +127,15 @@ public class AuctionService {
             {
                 auction.getItem().setSoldPrice(auction.getWinningBid().getBidAmount());
                 auction.getItem().setSold(true);
+                auction.getWinningBid().setBidStatus("accepted");
+                // set all other bisd in the auction to rejected
+                for(Bid bid : auction.getBids())
+                {
+                    if(bid != auction.getWinningBid())
+                    {
+                        bid.setBidStatus("rejected");
+                    }
+                }
             }
             
             auctionRepository.save(auction);
@@ -214,4 +228,8 @@ public class AuctionService {
             closeAuction(auction.getAuctionId());
         }
     }
+
+
 }
+
+

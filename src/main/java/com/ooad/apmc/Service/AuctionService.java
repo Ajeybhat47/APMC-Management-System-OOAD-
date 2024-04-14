@@ -70,6 +70,7 @@ public class AuctionService {
                 checkStatus(auction);
             }
 
+
            auctions = auctionRepository.findAll();
 
 
@@ -84,6 +85,11 @@ public class AuctionService {
     public List<AuctionDTO> getAllAuctionsByStatus(String status) {
         try {
             List<Auction> auctions = auctionRepository.findAllByStatus(status);
+            // check status
+            for(Auction auction : auctions)
+            {
+                checkStatus(auction);
+            }
             return auctions.stream().map(AuctionDTO::mapEntityToDto).collect(Collectors.toList());
         } catch (Exception e) {
             // Log the exception or handle it appropriately
@@ -92,7 +98,6 @@ public class AuctionService {
         }
     }
 
-    
     public List<BidDTO> getAllBids(Long auctionId) {
         try {
             Auction auction = auctionRepository.findById(auctionId).orElse(null);
@@ -107,11 +112,18 @@ public class AuctionService {
         }
     }
 
+    @Transactional
     public String closeAuction(Long auctionId) {
         try {
             Auction auction = auctionRepository.getReferenceById(auctionId);
             auction.setStatus("closed");
             setWinner(auctionId);
+            if(auction.getWinner() != null)
+            {
+                auction.getItem().setSoldPrice(auction.getWinningBid().getBidAmount());
+                auction.getItem().setSold(true);
+            }
+            
             auctionRepository.save(auction);
             return "Auction closed successfully";
            
@@ -129,7 +141,7 @@ public class AuctionService {
                 throw new IllegalArgumentException("Auction not found with ID: " + auctionId);
             }
 
-            if(auction.getStatus() != "closed"){
+            if(!auction.getStatus().equals("closed")){
                 throw new IllegalArgumentException("Auction is not closed yet");
             }
 
@@ -154,7 +166,7 @@ public class AuctionService {
     {
         Auction auction = auctionRepository.getReferenceById(auctionId);
 
-        if(auction.getStatus() != "Closed")
+        if(!auction.getStatus().equalsIgnoreCase("closed"))
         {
             return null;
         }
@@ -196,7 +208,7 @@ public class AuctionService {
         // get current time check closing time and modify status
         LocalDateTime now = LocalDateTime.now(); 
         
-        if(now.isAfter(auction.getClosingTime()));
+        if(now.isAfter(auction.getClosingTime()))
         {
             auction.setStatus("closed");
             closeAuction(auction.getAuctionId());

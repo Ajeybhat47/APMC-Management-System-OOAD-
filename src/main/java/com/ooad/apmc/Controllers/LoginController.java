@@ -94,9 +94,9 @@ public UserDTO userDTO() {
             if (user != null && user.getPassword().equals(password)) {
                 model.addAttribute("user", user);
                 if (role.equals("worker") && user instanceof Worker) {
-                    return "redirect:/worker/workerDashboard";
+                    return "redirect:/apmc/worker/"+user.getUserId();
                 } else if (role.equals("farmer") && user instanceof Farmer) {
-                    return "redirect:/farmer/farmerDashboard";
+                    return "redirect:/apmc/farmer/"+user.getUserId();
                 } else if (role.equals("trader") && user instanceof Trader) {
                     return "redirect:/apmc/trader/"+user.getUserId();
                 }

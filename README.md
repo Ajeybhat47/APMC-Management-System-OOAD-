@@ -1,14 +1,13 @@
-
 # APMC Management System
 
 ## Overview
 The **APMC Management System** is a Java-based web application designed to facilitate the selling of agricultural produce by farmers in the APMC Market. It also enables traders to participate in the bidding process for crops. The system simulates auctioning using Object-Oriented Programming (OOP) principles, design patterns, and modern web technologies.
 
 ## Features
-- **Auction Simulation**: Farmers can list their produce, and traders can bid on available crops in real-time.
-- **RESTful APIs**: REST APIs manage interaction between the frontend and backend, ensuring smooth and efficient data flow.
-- **Dynamic Web Pages**: Thymeleaf is used to create interactive and user-friendly interfaces for farmers and traders.
-- **Data Management**: Integrated with MySQL for reliable and efficient data storage.
+- **Auction Simulation**: Farmers can list their produce in the market, and traders can bid on available crops in real-time. The winner is determined automatically after the auction timer ends.
+- **Thymeleaf for Dynamic Web Pages**: Thymeleaf is used to create interactive and user-friendly web pages for farmers and traders, providing a seamless experience for listing produce and participating in auctions.
+- **Notifications**: After the auction is completed, the system automatically sends notifications to traders, the winning farmer, and workers regarding the availability of work.
+- **Data Management**: Integrated with MySQL for reliable and efficient data storage to keep track of auctions, bids, farmer listings, and user information.
 
 ## Tools & Technologies
 - **Java**
